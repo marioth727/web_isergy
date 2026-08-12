@@ -1,0 +1,223 @@
+---
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { site } from '../config/site';
+---
+<section class="section calc" id="calculadora">
+  <div class="container calc__inner">
+    <div class="calc__intro">
+      <p class="eyebrow">Calculadora de ahorro</p>
+      <h2 class="calc__title">¿Cuánto podrías ahorrar?</h2>
+      <p class="prose calc__lead">
+        Mueve el control según tu factura de luz actual y mira tu ahorro estimado.
+        Es solo una referencia: tu cotización real la hacemos gratis y a tu medida.
+      </p>
+    </div>
+
+    <form class="calc__card" data-calc>
+      <div class="calc__field">
+        <label for="bill">Tu factura de luz al mes</label>
+        <output class="calc__billout" data-bill-out>$300.000</output>
+        <input type="range" id="bill" name="bill" min="100000" max="2500000" step="10000" value="300000" data-bill />
+        <div class="calc__scale"><span>$100 mil</span><span>$2,5 M</span></div>
+      </div>
+
+      <fieldset class="calc__toggle" data-type>
+        <legend class="visually-hidden">Tipo de propiedad</legend>
+        <label><input type="radio" name="type" value="hogar" checked /> <span>Hogar</span></label>
+        <label><input type="radio" name="type" value="negocio" /> <span>Negocio</span></label>
+      </fieldset>
+
+      <div class="calc__results">
+        <div class="calc__result calc__result--main">
+          <span class="calc__result-label">Ahorro al mes</span>
+          <strong class="calc__result-value" data-save-month>$270.000</strong>
+        </div>
+        <div class="calc__result">
+          <span class="calc__result-label">Ahorro en 25 años</span>
+          <strong class="calc__result-value" data-save-life>$81 millones</strong>
+        </div>
+        <div class="calc__result">
+          <span class="calc__result-label">Sistema estimado</span>
+          <strong class="calc__result-value" data-size>3,3 kWp</strong>
+        </div>
+      </div>
+
+      <a class="btn calc__cta" href="#" data-quote target="_blank" rel="noopener">
+        <WhatsAppIcon /> Quiero mi cotización exacta
+      </a>
+      <p class="calc__disclaimer">Cálculo estimado con base en un ahorro del 90% y el sol promedio de {site.city}.</p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .calc {
+    background:
+      radial-gradient(90% 120% at 100% 0%, var(--brand-orange-wash), transparent 55%),
+      var(--paper);
+  }
+  .calc__inner {
+    display: grid;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  .calc__title { font-size: var(--step-4); margin-top: var(--space-sm); }
+  .calc__lead { margin-top: var(--space-md); color: var(--ink-soft); font-size: var(--step-1); }
+
+  .calc__card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-xl);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    box-shadow: var(--shadow-lg);
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .calc__field { display: grid; gap: var(--space-2xs); }
+  .calc__field label { font-weight: 600; color: var(--ink-soft); font-size: var(--step--1); }
+  .calc__billout {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--step-4);
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  input[type='range'] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 0.65rem;
+    border-radius: var(--radius-pill);
+    background: var(--surface-warm);
+    background-image: linear-gradient(var(--brand-orange), var(--brand-orange));
+    background-repeat: no-repeat;
+    background-size: 20% 100%;
+    cursor: pointer;
+    margin-top: var(--space-2xs);
+  }
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1.6rem; height: 1.6rem;
+    border-radius: 50%;
+    background: #fff;
+    border: 4px solid var(--brand-orange);
+    box-shadow: var(--shadow-md);
+  }
+  input[type='range']::-moz-range-thumb {
+    width: 1.6rem; height: 1.6rem;
+    border-radius: 50%;
+    background: #fff;
+    border: 4px solid var(--brand-orange);
+    box-shadow: var(--shadow-md);
+  }
+  .calc__scale {
+    display: flex; justify-content: space-between;
+    font-size: var(--step--1); color: var(--ink-faint);
+  }
+
+  .calc__toggle {
+    display: inline-flex;
+    gap: 0.25rem;
+    border: 1px solid var(--line);
+    background: var(--surface-warm);
+    border-radius: var(--radius-pill);
+    padding: 0.3rem;
+    width: fit-content;
+  }
+  .calc__toggle label {
+    cursor: pointer;
+    border-radius: var(--radius-pill);
+    padding: 0.45em 1.1em;
+    font-weight: 600;
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+    transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+  }
+  .calc__toggle input { position: absolute; opacity: 0; pointer-events: none; }
+  .calc__toggle label:has(input:checked) {
+    background: var(--ink-surface);
+    color: var(--paper);
+  }
+
+  .calc__results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    background: var(--brand-forest-wash);
+    border-radius: var(--radius-lg);
+  }
+  .calc__result { display: grid; gap: 0.15rem; }
+  .calc__result-label { font-size: var(--step--1); color: var(--ink-soft); }
+  .calc__result-value {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    color: var(--brand-forest-deep);
+    font-variant-numeric: tabular-nums;
+  }
+  .calc__result--main .calc__result-value { color: var(--brand-forest); }
+
+  .calc__cta { width: 100%; }
+  .calc__disclaimer { font-size: var(--step--1); color: var(--ink-faint); text-align: center; }
+
+  @media (min-width: 60rem) {
+    .calc__inner { grid-template-columns: 0.9fr 1.1fr; gap: var(--space-3xl); }
+  }
+</style>
+
+<script is:inline define:vars={{ whatsapp: site.whatsapp }}>
+  (function () {
+    const form = document.querySelector('[data-calc]');
+    if (!form) return;
+    const bill = form.querySelector('[data-bill]');
+    const billOut = form.querySelector('[data-bill-out]');
+    const saveMonth = form.querySelector('[data-save-month]');
+    const saveLife = form.querySelector('[data-save-life]');
+    const sizeOut = form.querySelector('[data-size]');
+    const quote = form.querySelector('[data-quote]');
+
+    const cop = (n) =>
+      '$' + Math.round(n).toLocaleString('es-CO', { maximumFractionDigits: 0 });
+
+    const millions = (n) => {
+      const m = n / 1_000_000;
+      return '$' + m.toLocaleString('es-CO', { maximumFractionDigits: m < 10 ? 1 : 0 }) + ' millones';
+    };
+
+    function typeValue() {
+      const checked = form.querySelector('input[name="type"]:checked');
+      return checked ? checked.value : 'hogar';
+    }
+
+    function update() {
+      const b = Number(bill.value);
+      // Negocios suelen tener mayor consumo diurno -> mayor aprovechamiento
+      const offset = typeValue() === 'negocio' ? 0.92 : 0.9;
+      const month = b * offset;
+      const life = month * 12 * 25; // 25 años de vida útil
+      // Tamaño estimado: kWh/mes = factura / ~750 COP; kWp = kWh_dia / 4.8 h sol
+      const kwhMonth = b / 750;
+      const kwp = (kwhMonth / 30) / 4.8;
+
+      billOut.textContent = cop(b);
+      saveMonth.textContent = cop(month);
+      saveLife.textContent = millions(life);
+      sizeOut.textContent = kwp.toLocaleString('es-CO', { maximumFractionDigits: 1 }) + ' kWp';
+
+      // rellena la barra del slider
+      const pct = ((b - bill.min) / (bill.max - bill.min)) * 100;
+      bill.style.backgroundSize = pct + '% 100%';
+
+      const msg =
+        `Hola Isergy 👋 Mi factura de luz es de ${cop(b)} al mes (${typeValue()}). ` +
+        `Vi en la calculadora que podría ahorrar ~${cop(month)}/mes. Quiero mi cotización exacta.`;
+      quote.href = `https://wa.me/${whatsapp}?text=${encodeURIComponent(msg)}`;
+    }
+
+    form.addEventListener('input', update);
+    update();
+  })();
+</script>

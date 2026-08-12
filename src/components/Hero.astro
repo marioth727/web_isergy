@@ -1,0 +1,238 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../assets/hero.jpeg';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { whatsappLink, site } from '../config/site';
+---
+<section class="hero" id="top">
+  <div class="hero__sky" aria-hidden="true">
+    <div class="hero__sun"></div>
+    <div class="hero__rays"></div>
+  </div>
+
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <p class="eyebrow">Energía solar en {site.city}</p>
+      <h1 class="hero__title">
+        Deja de <span class="hero__strike">pagarle</span> a la luz.
+        <span class="hero__accent">Empieza a producirla.</span>
+      </h1>
+      <p class="hero__lead prose">
+        Instalamos paneles solares que reducen tu factura hasta un <strong>95%</strong>.
+        Diseño, instalación y mantenimiento para tu hogar o negocio en la costa Caribe.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn" href={whatsappLink()} target="_blank" rel="noopener">
+          <WhatsAppIcon /> Cotiza gratis
+        </a>
+        <a class="btn btn--ghost" href="#calculadora">Calcula tu ahorro</a>
+      </div>
+
+      <ul class="hero__proof">
+        <li><strong>{site.stats.installs}</strong> instalaciones</li>
+        <li><strong>25 años</strong> de vida útil</li>
+        <li><strong>0</strong> cortes de energía</li>
+      </ul>
+    </div>
+
+    <div class="hero__visual">
+      <div class="hero__frame">
+        <Image
+          src={heroImg}
+          alt="Vivienda en Barranquilla con paneles solares instalados por Isergy"
+          widths={[480, 768, 1100, 1600]}
+          sizes="(min-width: 60rem) 48vw, 92vw"
+          class="hero__photo"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <span class="hero__chip">☀️ Sol de sobra en el Caribe</span>
+      </div>
+
+      <!-- Tarjeta de factura antes/después, flotando sobre la foto -->
+      <figure class="bill" aria-label="Comparación de factura de luz antes y después de instalar paneles solares">
+        <figcaption class="bill__head">
+          <span>Tu factura de luz</span>
+          <span class="bill__badge">−92%</span>
+        </figcaption>
+        <div class="bill__row">
+          <span class="bill__label">Antes</span>
+          <div class="bill__barwrap"><div class="bill__bar bill__bar--before"></div></div>
+          <span class="bill__amount">$780.000</span>
+        </div>
+        <div class="bill__row">
+          <span class="bill__label">Después</span>
+          <div class="bill__barwrap"><div class="bill__bar bill__bar--after"></div></div>
+          <span class="bill__amount bill__amount--good">$62.000</span>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: clamp(7rem, 6rem + 8vw, 10rem) var(--space-4xl);
+    overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 78% 8%, var(--brand-orange-wash), transparent 55%),
+      linear-gradient(180deg, var(--paper), var(--surface-warm));
+  }
+
+  .hero__sky { position: absolute; inset: 0; pointer-events: none; }
+  .hero__sun {
+    position: absolute;
+    top: -6rem; right: -4rem;
+    width: 30rem; height: 30rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, oklch(0.88 0.11 75 / 0.5), transparent 62%);
+    filter: blur(6px);
+  }
+  .hero__rays {
+    position: absolute;
+    top: -14rem; right: -10rem;
+    width: 44rem; height: 44rem;
+    background: conic-gradient(from 0deg,
+      transparent 0 6deg, oklch(0.85 0.12 70 / 0.12) 6deg 8deg,
+      transparent 8deg 22deg, oklch(0.85 0.12 70 / 0.09) 22deg 24deg,
+      transparent 24deg);
+    border-radius: 50%;
+    -webkit-mask: radial-gradient(circle, transparent 34%, #000 36%, transparent 70%);
+    mask: radial-gradient(circle, transparent 34%, #000 36%, transparent 70%);
+    animation: spin 90s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .hero__rays { animation: none; } }
+
+  .hero__inner {
+    position: relative;
+    display: grid;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .hero__title { font-size: var(--step-6); margin-top: var(--space-sm); max-width: 15ch; }
+  .hero__strike {
+    text-decoration: line-through;
+    text-decoration-color: var(--brand-orange);
+    text-decoration-thickness: 0.08em;
+    color: var(--ink-faint);
+  }
+  .hero__accent { color: var(--brand-forest); display: block; }
+
+  .hero__lead { margin-top: var(--space-md); font-size: var(--step-1); color: var(--ink-soft); }
+  .hero__lead strong { color: var(--ink); }
+
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-lg); }
+
+  .hero__proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--line);
+    list-style: none;
+    padding-left: 0;
+  }
+  .hero__proof li { font-size: var(--step--1); color: var(--ink-soft); line-height: 1.3; }
+  .hero__proof strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    color: var(--ink);
+  }
+
+  /* Visual */
+  .hero__visual { position: relative; }
+  .hero__frame {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 3 / 2;
+  }
+  .hero__photo { width: 100%; height: 100%; object-fit: cover; }
+  .hero__chip {
+    position: absolute;
+    top: var(--space-sm); left: var(--space-sm);
+    background: color-mix(in oklch, var(--paper) 88%, transparent);
+    backdrop-filter: blur(6px);
+    border-radius: var(--radius-pill);
+    padding: 0.5em 0.9em;
+    font-size: var(--step--1);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .bill {
+    position: relative;
+    margin: -3rem auto 0;
+    width: min(22rem, 88%);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-lg);
+    display: grid;
+    gap: var(--space-sm);
+  }
+  .bill__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: var(--step-0);
+  }
+  .bill__badge {
+    background: var(--brand-forest);
+    color: oklch(0.98 0.02 140);
+    font-size: var(--step--1);
+    padding: 0.25em 0.65em;
+    border-radius: var(--radius-pill);
+  }
+  .bill__row {
+    display: grid;
+    grid-template-columns: 3.2rem 1fr auto;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  .bill__label { font-size: var(--step--1); color: var(--ink-faint); }
+  .bill__barwrap {
+    height: 0.7rem;
+    background: var(--surface-warm);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+  }
+  .bill__bar { height: 100%; border-radius: var(--radius-pill); }
+  .bill__bar--before {
+    width: 100%;
+    background: linear-gradient(90deg, oklch(0.72 0.14 40), var(--brand-orange));
+  }
+  .bill__bar--after {
+    width: 8%;
+    background: var(--brand-forest);
+    animation: grow 1.2s var(--ease-out-expo) both;
+    animation-delay: 0.4s;
+  }
+  @keyframes grow { from { width: 0; } }
+  @media (prefers-reduced-motion: reduce) { .bill__bar--after { animation: none; } }
+
+  .bill__amount { font-weight: 700; font-variant-numeric: tabular-nums; font-size: var(--step--1); }
+  .bill__amount--good { color: var(--brand-forest); }
+
+  @media (min-width: 60rem) {
+    .hero__inner { grid-template-columns: 1.05fr 0.95fr; }
+    .hero__frame { aspect-ratio: 4 / 3; }
+    .bill {
+      position: absolute;
+      right: -1rem;
+      bottom: -1.75rem;
+      margin: 0;
+      width: 20rem;
+    }
+  }
+</style>

@@ -1,0 +1,110 @@
+---
+import '../styles/global.css';
+import { site } from '../config/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** ruta relativa, p. ej. "/" o "/servicios" */
+  path?: string;
+  /** JSON-LD adicional específico de la página */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title = `${site.name} — ${site.tagline}`,
+  description = site.description,
+  path = '/',
+  jsonLd,
+} = Astro.props;
+
+const canonical = new URL(path, site.url).href;
+const ogImage = new URL('/og-image.jpg', site.url).href;
+
+// Schema.org base: negocio local de energía solar
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'SolarPowerStation',
+  name: site.legalName,
+  alternateName: site.name,
+  url: site.url,
+  description: site.description,
+  telephone: `+${site.whatsapp}`,
+  email: site.email,
+  areaServed: [site.city, site.region, 'Costa Caribe', site.country],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: site.city,
+    addressRegion: site.region,
+    addressCountry: 'CO',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: site.geo.lat,
+    longitude: site.geo.lng,
+  },
+};
+
+const jsonLdBlocks = [localBusiness, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
+---
+
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#F39200" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- JSON-LD -->
+    {jsonLdBlocks.map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+  </head>
+  <body>
+    <a href="#contenido" class="skip-link">Saltar al contenido</a>
+    <slot name="header" />
+    <main id="contenido">
+      <slot />
+    </main>
+    <slot name="footer" />
+
+    <style>
+      .skip-link {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -120%);
+        z-index: 200;
+        padding: 0.75rem 1.25rem;
+        background: var(--ink);
+        color: var(--paper);
+        border-radius: 0 0 var(--radius-md) var(--radius-md);
+        font-weight: 700;
+        transition: transform var(--dur) var(--ease-out-quart);
+      }
+      .skip-link:focus { transform: translate(-50%, 0); }
+    </style>
+  </body>
+</html>

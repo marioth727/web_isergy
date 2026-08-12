@@ -1,0 +1,63 @@
+---
+import { municipios, municipioPath } from '../config/municipios';
+import { site } from '../config/site';
+---
+<section class="section cobertura" id="cobertura">
+  <div class="container">
+    <header class="cobertura__head">
+      <div>
+        <p class="eyebrow">Dónde instalamos</p>
+        <h2 class="cobertura__title">Energía solar en toda el área de {site.city}</h2>
+      </div>
+      <p class="prose cobertura__intro">
+        Nuestra base está en {site.city} y llevamos energía solar a los municipios del Atlántico.
+        Elige el tuyo y mira cómo podemos ayudarte.
+      </p>
+    </header>
+
+    <div class="cobertura__grid">
+      {municipios.map((m) => (
+        <a class="cobertura__card" href={municipioPath(m.slug)}>
+          <span class="cobertura__pin" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.3 7-11a7 7 0 10-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          </span>
+          <span class="cobertura__name">Paneles solares en {m.nombre}</span>
+          <span class="cobertura__dep">{m.departamento}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cobertura__head { display: grid; gap: var(--space-md); margin-bottom: var(--space-2xl); }
+  .cobertura__title { font-size: var(--step-4); margin-top: var(--space-sm); }
+  .cobertura__intro { color: var(--ink-soft); font-size: var(--step-1); }
+
+  .cobertura__grid {
+    display: grid; gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+  .cobertura__card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: var(--space-sm);
+    align-items: center;
+    padding: var(--space-md);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    transition: transform var(--dur) var(--ease-out-quart), box-shadow var(--dur) ease, border-color var(--dur) ease;
+  }
+  .cobertura__pin {
+    grid-row: 1 / 3;
+    display: grid; place-items: center;
+    width: 2.75rem; height: 2.75rem; border-radius: 50%;
+    background: var(--brand-orange-wash); color: var(--brand-orange);
+  }
+  .cobertura__pin svg { width: 1.4rem; height: 1.4rem; }
+  .cobertura__name { font-family: var(--font-display); font-weight: 700; font-size: var(--step-0); align-self: end; }
+  .cobertura__dep { color: var(--ink-faint); font-size: var(--step--1); align-self: start; }
+  .cobertura__card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--brand-orange-soft); }
+</style>

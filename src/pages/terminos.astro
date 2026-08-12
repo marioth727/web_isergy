@@ -1,0 +1,272 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../config/site';
+
+const title = `Términos y Condiciones — ${site.name}`;
+const description = 'Términos y condiciones de uso del sitio web y servicios de Isergy.';
+const path = '/terminos/';
+---
+
+<BaseLayout title={title} description={description} path={path}>
+  <Header slot="header" />
+
+  <article class="legal">
+    <section class="legal__hero">
+      <div class="container-narrow">
+        <h1>Términos y Condiciones</h1>
+        <p class="legal__meta">Última actualización: {new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+      </div>
+    </section>
+
+    <section class="section legal__body">
+      <div class="container-narrow prose">
+        <h2>1. Aceptación de Términos</h2>
+        <p>
+          Al acceder y usar este sitio web de <strong>{site.legalName}</strong>, aceptas estar legalmente vinculado
+          por estos Términos y Condiciones. Si no estás de acuerdo con alguna parte, no debes usar este sitio.
+        </p>
+
+        <h2>2. Descripción del Servicio</h2>
+        <p>
+          {site.legalName} ofrece:
+        </p>
+        <ul>
+          <li>Información sobre sistemas de energía solar fotovoltaica.</li>
+          <li>Cotizaciones y diagnósticos energéticos (sin costo inicial).</li>
+          <li>Diseño, instalación y mantenimiento de sistemas solares en {site.city} y área Caribe.</li>
+          <li>Asesoría técnica y seguimiento post-venta.</li>
+        </ul>
+
+        <h2>3. Uso Aceptable</h2>
+        <p>
+          Aceptas usar este sitio solo para propósitos legales y de manera que no infrinja los derechos de otros ni
+          restrinja su acceso. Específicamente, te comprometes a no:
+        </p>
+        <ul>
+          <li>Compartir contenido obsceno, ofensivo o difamatorio.</li>
+          <li>Intentar hackear, modificar o interferir con la seguridad del sitio.</li>
+          <li>Usar bots o scrapers automáticos sin permiso.</li>
+          <li>Publicitar o promocionar servicios competidores.</li>
+          <li>Infringir derechos de propiedad intelectual (marcas, patentes, contenido).</li>
+        </ul>
+
+        <h2>4. Cotizaciones y Propuestas</h2>
+        <h3>4.1 Carácter de las Cotizaciones</h3>
+        <p>
+          Las cotizaciones que proporcionamos son estimaciones basadas en la información que nos compartes
+          (factura, consumo, área disponible). Son válidas por <strong>30 días</strong> desde la emisión. Cambios en
+          costos de componentes, logística o condiciones de acceso pueden afectar la propuesta final.
+        </p>
+
+        <h3>4.2 Diagnóstico</h3>
+        <p>
+          El diagnóstico in situ (inspección técnica de tu propiedad) es <strong>gratuito</strong> y sin
+          compromiso. Permite propuestas más precisas. Aceptas que nuestro equipo acceda a áreas relevantes (techo,
+          acometida eléctrica) para realizar evaluaciones.
+        </p>
+
+        <h3>4.3 Contratación</h3>
+        <p>
+          Una cotización aceptada debe formalizarse mediante un <strong>contrato de instalación</strong> separado,
+          que especificará obra, plazo, garantía y términos de pago. Este sitio y sus cotizaciones no constituyen un
+          contrato vinculante.
+        </p>
+
+        <h2>5. Limitación de Responsabilidad</h2>
+        <p>
+          El sitio se proporciona "tal como está" sin garantías de ningún tipo. {site.legalName} no es responsable
+          por:
+        </p>
+        <ul>
+          <li>Interrupciones, errores o inexactitudes en el contenido o funcionalidad del sitio.</li>
+          <li>Daños indirectos, incidentales o punitivos derivados del uso o imposibilidad de usar el sitio.</li>
+          <li>Pérdida de datos, ingresos o negocios.</li>
+          <li>Contenido de terceros o enlaces externos.</li>
+        </ul>
+        <p>
+          <strong>Limitación de daños:</strong> La responsabilidad total de Isergy por cualquier reclamación no
+          excederá el monto pagado por ti en los últimos 12 meses (si aplica). En caso de servicios gratuitos, la
+          responsabilidad es limitada a cero.
+        </p>
+
+        <h2>6. Garantía de Equipos e Instalación</h2>
+        <p>
+          Las garantías de equipos (paneles, inversores, baterías) corren por cuenta de los fabricantes. Isergy
+          actúa como distribuidor autorizado y facilitará reclamos bajo esas garantías.
+        </p>
+        <p>
+          La instalación (mano de obra) tiene garantía de <strong>1 año</strong> contra defectos de fabricación
+          (cobertura: reparación o reemplazo). Excluye: desgaste normal, daño por terceros, cambios climáticos
+          extremos, falta de mantenimiento.
+        </p>
+
+        <h2>7. Pago y Términos Comerciales</h2>
+        <p>
+          Los términos de pago se especificarán en cada contrato de instalación. Típicamente:
+        </p>
+        <ul>
+          <li>
+            <strong>Anticipo:</strong> 30% al firmar el contrato.
+          </li>
+          <li>
+            <strong>Avance:</strong> 40% al inicio de instalación.
+          </li>
+          <li>
+            <strong>Final:</strong> 30% a completación e inspección exitosa.
+          </li>
+        </ul>
+        <p>
+          Métodos aceptados: Transferencia bancaria, tarjeta de crédito, efectivo (localmente). Impuestos (IVA) están
+          incluidos en cotizaciones a clientes finales en Colombia.
+        </p>
+
+        <h2>8. Cancelación y Devolución</h2>
+        <p>
+          <strong>Cancelaciones antes de iniciar obra:</strong> El cliente puede cancelar dentro de 5 días de firma
+          del contrato. Reembolso: anticipo pagado menos costos administrativos (máx. 10%).
+        </p>
+        <p>
+          <strong>Después de iniciada la obra:</strong> Aplican penalidades según progreso. Detalles en el contrato.
+        </p>
+        <p>
+          <strong>Defectos post-instalación:</strong> Reportar dentro de 30 días. Isergy evaluará y reparará sin costo
+          bajo garantía.
+        </p>
+
+        <h2>9. Propiedad Intelectual</h2>
+        <p>
+          Todo contenido del sitio (textos, imágenes, logos, código) es propiedad de {site.legalName} o sus
+          licenciantes. No puedes reproducir, distribuir o modificar sin permiso escrito. Uso personal no comercial es
+          permitido.
+        </p>
+
+        <h2>10. Enlaces Externos</h2>
+        <p>
+          Este sitio contiene enlaces a terceros (redes, reguladores, proveedores). No controlamos esos sitios ni
+          somos responsables de su contenido o políticas. Revisar sus términos antes de usar.
+        </p>
+
+        <h2>11. Cambios a este Sitio y Términos</h2>
+        <p>
+          {site.legalName} se reserva el derecho de modificar este sitio, servicios y estos términos en cualquier
+          momento. Cambios significativos te notificaremos por correo (si tienes registro) o publicando aquí. Tu uso
+          continuo implica aceptación.
+        </p>
+
+        <h2>12. Confidencialidad Comercial</h2>
+        <p>
+          Información compartida durante diagnóstico, cotización o negociación (especificaciones técnicas, precios,
+          propuestas) es confidencial. Ambas partes se comprometen a no divulgarla sin consentimiento, excepto a
+          empleados directos o asesores legales/financieros necesarios.
+        </p>
+
+        <h2>13. Ley Aplicable y Jurisdicción</h2>
+        <p>
+          Estos términos se rigen por las leyes de la República de Colombia. Cualquier disputa se resolverá:
+        </p>
+        <ul>
+          <li><strong>Primero:</strong> Negociación amistosa (30 días).</li>
+          <li>
+            <strong>Luego:</strong> Mediación o arbitraje ante <strong>Cámara de Comercio de Barranquilla</strong>.
+          </li>
+          <li>
+            <strong>Último recurso:</strong> Juzgados competentes en Barranquilla, Atlántico.
+          </li>
+        </ul>
+
+        <h2>14. Cumplimiento Regulatorio</h2>
+        <p>
+          Isergy y sus instalaciones cumplen con:
+        </p>
+        <ul>
+          <li>Códigos de seguridad eléctrica RETIE (Reglamento Técnico de Instalaciones Eléctricas Colombia).</li>
+          <li>Normas NTC-IEC de conexión a red.</li>
+          <li>Regulaciones CREG (Comisión de Regulación de Energía y Gas).</li>
+          <li>Garantías de fabricantes (certificaciones internacionales IEC, UL, TÜV).</li>
+        </ul>
+
+        <h2>15. Independencia Contractual</h2>
+        <p>
+          Este sitio y sus términos son independientes de cualquier contrato de instalación específico. En caso de
+          conflicto entre este documento y un contrato firmado, prevalece el contrato (más específico y negociado).
+        </p>
+
+        <h2>16. Contacto</h2>
+        <p>
+          Para preguntas sobre estos términos o reportar problemas:
+        </p>
+        <ul>
+          <li>
+            <strong>Correo:</strong> <a href={`mailto:${site.email}`}>{site.email}</a>
+          </li>
+          <li>
+            <strong>WhatsApp:</strong> <a href={`https://wa.me/${site.whatsapp}`}>{site.whatsappDisplay}</a>
+          </li>
+          <li>
+            <strong>Dirección:</strong> {site.address}
+          </li>
+        </ul>
+
+        <hr />
+
+        <p style="text-align: center; margin-top: 3rem; color: var(--ink-faint);">
+          © {new Date().getFullYear()} {site.legalName}. Todos los derechos reservados.
+        </p>
+      </div>
+    </section>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .legal__hero {
+    padding-block: var(--space-3xl) var(--space-2xl);
+    background: var(--surface-warm);
+    border-bottom: 1px solid var(--line);
+  }
+  .legal__hero h1 {
+    font-size: var(--step-4);
+    margin-bottom: var(--space-md);
+  }
+  .legal__meta {
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+  }
+
+  .legal__body {
+    background: var(--paper);
+  }
+  .legal__body h2 {
+    margin-top: var(--space-2xl);
+    font-size: var(--step-2);
+    margin-bottom: var(--space-md);
+  }
+  .legal__body h3 {
+    margin-top: var(--space-lg);
+    font-size: var(--step-1);
+    margin-bottom: var(--space-sm);
+    color: var(--brand-forest);
+  }
+  .legal__body ul {
+    margin-left: 1.5rem;
+    margin-bottom: var(--space-md);
+  }
+  .legal__body li {
+    margin-bottom: 0.5rem;
+  }
+  .legal__body a {
+    color: var(--brand-orange);
+    font-weight: 600;
+  }
+  .legal__body a:hover {
+    text-decoration: underline;
+  }
+  .legal__body hr {
+    margin: var(--space-2xl) 0;
+    border: none;
+    border-top: 1px solid var(--line);
+  }
+</style>

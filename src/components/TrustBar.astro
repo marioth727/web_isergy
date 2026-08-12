@@ -1,0 +1,48 @@
+---
+const items = [
+  { icon: 'shield', text: 'Equipos con garantía de fábrica' },
+  { icon: 'bolt', text: 'Paneles Tier 1 de alta eficiencia' },
+  { icon: 'tools', text: 'Instalación certificada' },
+  { icon: 'leaf', text: 'Energía 100% limpia' },
+];
+---
+<section class="trust" aria-label="Garantías">
+  <div class="container trust__inner">
+    {items.map((it) => (
+      <div class="trust__item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          {it.icon === 'shield' && <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" />}
+          {it.icon === 'bolt' && <path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" />}
+          {it.icon === 'tools' && <path d="M14 7a4 4 0 015 5l6 6-2 2-6-6a4 4 0 01-5-5l2 2 2-2-2-2z" transform="translate(-2 -1) scale(0.8)" />}
+          {it.icon === 'leaf' && <path d="M4 20c8 2 16-4 16-14-8 0-16 4-16 14zM4 20c2-6 6-9 10-11" />}
+        </svg>
+        <span>{it.text}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .trust {
+    background: var(--ink-surface);
+    color: oklch(0.92 0.01 80);
+  }
+  .trust__inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--space-md) var(--space-xl);
+    padding-block: var(--space-lg);
+  }
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-weight: 600;
+    font-size: var(--step--1);
+  }
+  .trust__item svg {
+    width: 1.6rem; height: 1.6rem;
+    color: var(--brand-lime);
+    flex: none;
+  }
+</style>

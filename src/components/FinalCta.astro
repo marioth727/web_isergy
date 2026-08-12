@@ -1,0 +1,65 @@
+---
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { whatsappLink } from '../config/site';
+---
+<section class="finalcta">
+  <div class="container finalcta__inner">
+    <div class="finalcta__glow" aria-hidden="true"></div>
+    <p class="eyebrow">Da el paso</p>
+    <h2 class="finalcta__title">El sol ya está afuera. Aprovéchalo.</h2>
+    <p class="finalcta__lead prose">
+      Pídenos una cotización gratis y sin compromiso. Te decimos exactamente cuánto
+      puedes ahorrar y qué sistema es el ideal para ti.
+    </p>
+    <div class="finalcta__actions">
+      <a class="btn btn--light" href={whatsappLink()} target="_blank" rel="noopener">
+        <WhatsAppIcon /> Cotiza gratis por WhatsApp
+      </a>
+    </div>
+    <p class="finalcta__note">Respuesta el mismo día · Sin costo · Sin compromiso</p>
+  </div>
+</section>
+
+<style>
+  .finalcta {
+    background: linear-gradient(160deg, var(--brand-forest-deep), oklch(0.32 0.06 155));
+    color: oklch(0.95 0.02 130);
+    overflow: hidden;
+  }
+  .finalcta__inner {
+    position: relative;
+    text-align: center;
+    padding-block: var(--space-4xl);
+    display: grid;
+    justify-items: center;
+    gap: var(--space-sm);
+  }
+  .finalcta__glow {
+    position: absolute;
+    top: -30%; left: 50%;
+    transform: translateX(-50%);
+    width: 40rem; height: 40rem;
+    background: radial-gradient(circle, oklch(0.85 0.14 75 / 0.35), transparent 60%);
+    pointer-events: none;
+  }
+  .finalcta .eyebrow { color: var(--brand-lime); }
+  .finalcta .eyebrow::before { background: var(--brand-orange); }
+  .finalcta__title {
+    position: relative;
+    color: #fff;
+    font-size: var(--step-5);
+    max-width: 18ch;
+  }
+  .finalcta__lead {
+    position: relative;
+    color: oklch(0.9 0.03 130);
+    font-size: var(--step-1);
+    margin-top: var(--space-2xs);
+  }
+  .finalcta__actions { position: relative; margin-top: var(--space-md); }
+  .finalcta__note {
+    position: relative;
+    font-size: var(--step--1);
+    color: oklch(0.85 0.04 130);
+  }
+</style>

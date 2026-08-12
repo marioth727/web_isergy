@@ -1,0 +1,80 @@
+---
+import { faqs } from '../config/faq';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { whatsappLink } from '../config/site';
+---
+<section class="section faq" id="faq">
+  <div class="container faq__inner">
+    <div class="faq__aside">
+      <p class="eyebrow">Preguntas frecuentes</p>
+      <h2 class="faq__title">Resolvemos tus dudas</h2>
+      <p class="prose faq__lead">¿No ves tu pregunta? Escríbenos y te respondemos sin compromiso.</p>
+      <a class="btn btn--ghost" href={whatsappLink('Hola Isergy, tengo una pregunta sobre energía solar.')} target="_blank" rel="noopener">
+        <WhatsAppIcon /> Pregúntanos
+      </a>
+    </div>
+
+    <div class="faq__list">
+      {faqs.map((f, i) => (
+        <details class="qa" name="faq" open={i === 0}>
+          <summary>
+            <span>{f.q}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <div class="qa__body"><p>{f.a}</p></div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__inner { display: grid; gap: var(--space-2xl); align-items: start; }
+  .faq__title { font-size: var(--step-4); margin-top: var(--space-sm); }
+  .faq__lead { margin-block: var(--space-md) var(--space-lg); color: var(--ink-soft); }
+
+  .faq__list { display: grid; }
+  .qa {
+    border-top: 1px solid var(--line);
+  }
+  .qa:last-child { border-bottom: 1px solid var(--line); }
+  .qa summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-1);
+    color: var(--ink);
+  }
+  .qa summary::-webkit-details-marker { display: none; }
+  .qa summary svg {
+    width: 1.4rem; height: 1.4rem;
+    color: var(--brand-orange);
+    flex: none;
+    transition: transform var(--dur) var(--ease-out-quart);
+  }
+  .qa[open] summary svg { transform: rotate(180deg); }
+
+  .qa__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--dur) var(--ease-out-expo);
+  }
+  .qa[open] .qa__body { grid-template-rows: 1fr; }
+  .qa__body > p {
+    overflow: hidden;
+    color: var(--ink-soft);
+    max-width: 60ch;
+    padding-bottom: var(--space-md);
+  }
+
+  @media (min-width: 62rem) {
+    .faq__inner { grid-template-columns: 0.8fr 1.2fr; gap: var(--space-3xl); }
+    .faq__aside { position: sticky; top: 6rem; }
+  }
+</style>

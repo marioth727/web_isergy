@@ -1,0 +1,98 @@
+---
+// TODO: reemplazar los placeholders por fotos reales de instalaciones (public/proyectos/*.jpg)
+const projects = [
+  { title: 'Casa en Villa Country', place: 'Barranquilla', size: '5,5 kWp', save: '92%', tone: 'a' },
+  { title: 'Local comercial', place: 'Soledad', size: '8 kWp', save: '88%', tone: 'b' },
+  { title: 'Finca productiva', place: 'Atlántico', size: '10 kWp', save: '95%', tone: 'c' },
+  { title: 'Vivienda familiar', place: 'Puerto Colombia', size: '4 kWp', save: '90%', tone: 'd' },
+];
+---
+<section class="section projects" id="proyectos">
+  <div class="container">
+    <header class="projects__head">
+      <div>
+        <p class="eyebrow">Proyectos reales</p>
+        <h2 class="projects__title">Sistemas que ya están ahorrando</h2>
+      </div>
+      <p class="prose projects__intro">
+        Cada instalación es distinta. Estos son algunos de los hogares y negocios
+        que hoy producen su propia energía con Isergy.
+      </p>
+    </header>
+
+    <div class="gallery">
+      {projects.map((p) => (
+        <article class={`project project--${p.tone}`}>
+          <div class="project__photo" role="img" aria-label={`Instalación solar: ${p.title}`}>
+            <svg class="project__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/></svg>
+            <span class="project__save">−{p.save}</span>
+          </div>
+          <div class="project__meta">
+            <h3>{p.title}</h3>
+            <p>{p.place} · Sistema de {p.size}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects__head {
+    display: grid;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+  }
+  .projects__title { font-size: var(--step-4); margin-top: var(--space-sm); }
+  .projects__intro { color: var(--ink-soft); font-size: var(--step-1); }
+
+  .gallery {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+  .project {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    transition: transform var(--dur) var(--ease-out-quart), box-shadow var(--dur) ease;
+  }
+  .project:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+  .project__photo {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  .project--a .project__photo { background: linear-gradient(150deg, oklch(0.8 0.12 70), oklch(0.62 0.14 45)); }
+  .project--b .project__photo { background: linear-gradient(150deg, var(--brand-forest), oklch(0.42 0.09 150)); }
+  .project--c .project__photo { background: linear-gradient(150deg, oklch(0.78 0.15 120), var(--brand-forest)); }
+  .project--d .project__photo { background: linear-gradient(150deg, oklch(0.75 0.13 65), oklch(0.55 0.11 140)); }
+
+  .project__sun {
+    width: 40%; height: 40%;
+    fill: oklch(1 0 0 / 0.85);
+    filter: drop-shadow(0 4px 12px oklch(0.3 0.05 60 / 0.3));
+  }
+  .project__save {
+    position: absolute;
+    top: var(--space-sm); right: var(--space-sm);
+    background: oklch(0.2 0.02 250 / 0.55);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    font-weight: 700;
+    font-size: var(--step--1);
+    padding: 0.3em 0.7em;
+    border-radius: var(--radius-pill);
+  }
+  .project__meta { padding: var(--space-md); }
+  .project__meta h3 { font-size: var(--step-1); }
+  .project__meta p { color: var(--ink-soft); font-size: var(--step--1); margin-top: 0.15rem; }
+
+  @media (min-width: 60rem) {
+    .projects__head { grid-template-columns: 1fr 1fr; align-items: end; }
+  }
+</style>

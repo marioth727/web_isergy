@@ -1,0 +1,238 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../../assets/hero.jpeg';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Calculator from '../../components/Calculator.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import WhatsAppIcon from '../../components/WhatsAppIcon.astro';
+import { municipios, municipioPath } from '../../config/municipios';
+import { site, whatsappLink } from '../../config/site';
+
+export function getStaticPaths() {
+  return municipios.map((m) => ({ params: { municipio: m.slug }, props: { m } }));
+}
+
+const { m } = Astro.props;
+const path = municipioPath(m.slug);
+
+const title = `Paneles solares en ${m.nombre} | Energía solar — Isergy`;
+const description = `Instalación de paneles solares en ${m.nombre}, ${m.departamento}. Ahorra hasta 95% en tu factura de ${m.operador} con energía solar. Diseño, instalación y mantenimiento. Cotiza gratis.`;
+
+// Otros municipios (enlazado interno entre spokes)
+const otros = municipios.filter((x) => x.slug !== m.slug);
+
+// FAQ localizada (para la página y para el schema)
+const faqs = [
+  m.faqLocal,
+  {
+    q: `¿Cuánto puedo ahorrar con paneles solares en ${m.nombre}?`,
+    a: `La mayoría de nuestros clientes reduce su factura entre un 80% y un 95%. Con las ${m.hsp} horas de sol pico promedio de ${m.nombre}, el aprovechamiento es muy alto durante todo el año.`,
+  },
+  {
+    q: '¿En cuánto tiempo recupero la inversión?',
+    a: 'Normalmente entre 3 y 5 años. Después, la energía que produces es prácticamente gratis durante los más de 20 años de vida útil restantes.',
+  },
+];
+
+const wpMsg = `Hola Isergy 👋 Quiero cotizar paneles solares en ${m.nombre}, ${m.departamento}.`;
+
+// Schema.org: FAQPage + BreadcrumbList
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: site.url },
+      { '@type': 'ListItem', position: 2, name: `Paneles solares en ${m.nombre}`, item: new URL(path, site.url).href },
+    ],
+  },
+];
+---
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <Header slot="header" />
+
+  <article>
+    <!-- Hero localizado -->
+    <section class="lhero">
+      <div class="lhero__sky" aria-hidden="true"><div class="lhero__sun"></div></div>
+      <div class="container lhero__inner">
+        <div class="lhero__copy">
+          <nav class="crumbs" aria-label="Ruta de navegación">
+            <a href="/">Inicio</a> <span aria-hidden="true">/</span>
+            <span>Paneles solares en {m.nombre}</span>
+          </nav>
+          <p class="eyebrow">Energía solar en {m.nombre}, {m.departamento}</p>
+          <h1 class="lhero__title">Paneles solares en {m.nombre}</h1>
+          <p class="lhero__lead prose">
+            Instalamos sistemas solares que reducen hasta un <strong>95%</strong> tu factura de {m.operador} en {m.nombre}. Diseño, instalación y mantenimiento con garantía.
+          </p>
+          <div class="lhero__actions">
+            <a class="btn" href={whatsappLink(wpMsg)} target="_blank" rel="noopener">
+              <WhatsAppIcon /> Cotiza gratis en {m.nombre}
+            </a>
+            <a class="btn btn--ghost" href="#calculadora">Calcula tu ahorro</a>
+          </div>
+        </div>
+        <div class="lhero__frame">
+          <Image src={heroImg} alt={`Vivienda con paneles solares instalados por Isergy en ${m.nombre}`} widths={[480, 768, 1100]} sizes="(min-width: 60rem) 46vw, 92vw" loading="eager" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Datos locales reales -->
+    <section class="ldata">
+      <div class="container ldata__grid">
+        <div class="ldata__item"><span>Operador de energía</span><strong>{m.operador}</strong></div>
+        <div class="ldata__item"><span>Sol pico promedio</span><strong>{m.hsp} h/día</strong></div>
+        <div class="ldata__item"><span>Habitantes</span><strong>{m.habitantes}</strong></div>
+        <div class="ldata__item"><span>Desde Barranquilla</span><strong>{m.distanciaKm} km</strong></div>
+      </div>
+    </section>
+
+    <!-- Contenido único local -->
+    <section class="section lbody">
+      <div class="container-narrow">
+        <h2>Energía solar a la medida de {m.nombre}</h2>
+        <p class="lbody__lead">{m.angulo}</p>
+        <p class="lbody__cover">
+          Atendemos {m.referencia} y todo {m.nombre}. Nuestra base está en Barranquilla, a solo {m.distanciaKm} km, así que el diagnóstico y la instalación son rápidos.
+        </p>
+
+        <ul class="lbody__points">
+          <li><strong>Ahorro real:</strong> menos dependencia de las alzas de tarifa de {m.operador}.</li>
+          <li><strong>Instalación certificada:</strong> equipo propio y equipos con garantía de fábrica.</li>
+          <li><strong>Acompañamiento:</strong> diseño, trámites de conexión y mantenimiento.</li>
+        </ul>
+      </div>
+    </section>
+
+    <Calculator />
+
+    <!-- FAQ local -->
+    <section class="section lfaq">
+      <div class="container-narrow">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2 class="lfaq__title">Energía solar en {m.nombre}: tus dudas</h2>
+        <div class="lfaq__list">
+          {faqs.map((f, i) => (
+            <details class="qa" name="lfaq" open={i === 0}>
+              <summary>
+                <span>{f.q}</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              </summary>
+              <div class="qa__body"><p>{f.a}</p></div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Cobertura: enlaces a otros municipios -->
+    <section class="section lcover">
+      <div class="container">
+        <p class="eyebrow">Cobertura</p>
+        <h2 class="lcover__title">También instalamos paneles solares en</h2>
+        <div class="lcover__grid">
+          {otros.map((o) => (
+            <a class="lcover__card" href={municipioPath(o.slug)}>
+              <span>{o.nombre}</span>
+              <small>{o.departamento}</small>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <FinalCta />
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .lhero {
+    position: relative;
+    padding-block: clamp(6.5rem, 6rem + 7vw, 9rem) var(--space-2xl);
+    overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 82% 6%, var(--brand-orange-wash), transparent 55%),
+      linear-gradient(180deg, var(--paper), var(--surface-warm));
+  }
+  .lhero__sun {
+    position: absolute; top: -8rem; right: -6rem;
+    width: 28rem; height: 28rem; border-radius: 50%;
+    background: radial-gradient(circle, oklch(0.88 0.11 75 / 0.45), transparent 62%);
+  }
+  .lhero__inner { position: relative; display: grid; gap: var(--space-2xl); align-items: center; }
+  .crumbs { font-size: var(--step--1); color: var(--ink-faint); display: flex; gap: 0.5ch; margin-bottom: var(--space-md); }
+  .crumbs a { color: var(--brand-forest); font-weight: 600; }
+  .lhero__title { font-size: var(--step-5); margin-top: var(--space-sm); }
+  .lhero__lead { margin-top: var(--space-md); font-size: var(--step-1); color: var(--ink-soft); }
+  .lhero__lead strong { color: var(--ink); }
+  .lhero__actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-lg); }
+  .lhero__frame { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); aspect-ratio: 4/3; }
+  .lhero__frame :global(img) { width: 100%; height: 100%; object-fit: cover; }
+
+  .ldata { background: var(--ink-surface); color: oklch(0.92 0.01 80); }
+  .ldata__grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: var(--space-md); padding-block: var(--space-lg);
+  }
+  .ldata__item { display: grid; gap: 0.15rem; }
+  .ldata__item span { font-size: var(--step--1); color: oklch(0.7 0.02 80); }
+  .ldata__item strong { font-family: var(--font-display); font-size: var(--step-2); color: #fff; }
+
+  .lbody h2 { font-size: var(--step-3); }
+  .lbody__lead { margin-top: var(--space-md); font-size: var(--step-1); color: var(--ink-soft); }
+  .lbody__cover { margin-top: var(--space-md); color: var(--ink-soft); }
+  .lbody__points { margin-top: var(--space-lg); display: grid; gap: var(--space-sm); padding-left: 0; list-style: none; }
+  .lbody__points li { padding-left: 1.75rem; position: relative; color: var(--ink-soft); }
+  .lbody__points li::before {
+    content: ''; position: absolute; left: 0; top: 0.55em;
+    width: 0.7rem; height: 0.7rem; border-radius: 50%;
+    background: var(--brand-lime); box-shadow: 0 0 0 4px oklch(0.79 0.16 130 / 0.25);
+  }
+  .lbody__points strong { color: var(--ink); }
+
+  .lfaq { background: var(--surface-warm); }
+  .lfaq__title { font-size: var(--step-3); margin: var(--space-sm) 0 var(--space-lg); }
+  .lfaq__list { display: grid; }
+  .qa { border-top: 1px solid var(--line); }
+  .qa:last-child { border-bottom: 1px solid var(--line); }
+  .qa summary {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--space-md);
+    padding: var(--space-md) 0; cursor: pointer; list-style: none;
+    font-family: var(--font-display); font-weight: 700; font-size: var(--step-1); color: var(--ink);
+  }
+  .qa summary::-webkit-details-marker { display: none; }
+  .qa summary svg { width: 1.4rem; height: 1.4rem; color: var(--brand-orange); flex: none; transition: transform var(--dur) var(--ease-out-quart); }
+  .qa[open] summary svg { transform: rotate(180deg); }
+  .qa__body > p { color: var(--ink-soft); max-width: 60ch; padding-bottom: var(--space-md); }
+
+  .lcover__title { font-size: var(--step-3); margin: var(--space-sm) 0 var(--space-lg); }
+  .lcover__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--space-sm); }
+  .lcover__card {
+    display: grid; gap: 0.1rem;
+    padding: var(--space-md);
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md);
+    transition: transform var(--dur) var(--ease-out-quart), box-shadow var(--dur) ease, border-color var(--dur) ease;
+  }
+  .lcover__card span { font-family: var(--font-display); font-weight: 700; font-size: var(--step-1); }
+  .lcover__card small { color: var(--ink-faint); font-size: var(--step--1); }
+  .lcover__card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--brand-orange-soft); }
+
+  @media (min-width: 60rem) {
+    .lhero__inner { grid-template-columns: 1.05fr 0.95fr; }
+  }
+</style>

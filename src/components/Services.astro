@@ -1,0 +1,105 @@
+---
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { whatsappLink } from '../config/site';
+
+const services = [
+  {
+    title: 'Sistemas On-Grid',
+    desc: 'Conectados a la red: ahorras al máximo y puedes inyectar excedentes. La opción más rentable para ciudad.',
+  },
+  {
+    title: 'Sistemas Off-Grid',
+    desc: 'Autonomía total con baterías, ideal para fincas y zonas sin red eléctrica confiable.',
+  },
+  {
+    title: 'Sistemas Híbridos',
+    desc: 'Lo mejor de ambos mundos: ahorro en red y respaldo con baterías ante cortes.',
+  },
+  {
+    title: 'Diseño y trámites',
+    desc: 'Dimensionamos el sistema a tu consumo y gestionamos permisos y conexión con el operador.',
+  },
+  {
+    title: 'Mantenimiento',
+    desc: 'Preventivo y correctivo para que tu sistema rinda al 100% durante toda su vida útil.',
+  },
+  {
+    title: 'Venta de componentes',
+    desc: 'Paneles, inversores, baterías y estructuras de marcas confiables, con asesoría técnica.',
+  },
+];
+---
+<section class="section services" id="servicios">
+  <div class="container services__grid">
+    <div class="services__aside">
+      <p class="eyebrow">Lo que hacemos</p>
+      <h2 class="services__title">Soluciones solares de principio a fin</h2>
+      <p class="services__lead prose">
+        Desde el diseño hasta el mantenimiento, nos encargamos de todo para que
+        tú solo veas bajar la factura.
+      </p>
+      <a class="btn" href={whatsappLink('Hola Isergy, quiero asesoría sobre qué sistema solar me conviene.')} target="_blank" rel="noopener">
+        <WhatsAppIcon /> Habla con un experto
+      </a>
+    </div>
+
+    <ol class="services__list">
+      {services.map((s, i) => (
+        <li class="service">
+          <span class="service__index">{String(i + 1).padStart(2, '0')}</span>
+          <div class="service__body">
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+          </div>
+          <svg class="service__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .services { background: var(--surface-warm); }
+  .services__grid {
+    display: grid;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .services__title { font-size: var(--step-4); margin-top: var(--space-sm); }
+  .services__lead { margin-block: var(--space-md) var(--space-lg); color: var(--ink-soft); font-size: var(--step-1); }
+
+  .services__list { list-style: none; padding: 0; display: grid; }
+  .service {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-top: 1px solid var(--line);
+    transition: background var(--dur-fast) ease;
+  }
+  .service:last-child { border-bottom: 1px solid var(--line); }
+  .service:hover { background: color-mix(in oklch, var(--brand-orange-wash) 60%, transparent); }
+  .service__index {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--step-1);
+    color: var(--brand-orange);
+    min-width: 2.5rem;
+  }
+  .service__body h3 { font-size: var(--step-1); }
+  .service__body p { color: var(--ink-soft); font-size: var(--step-0); margin-top: 0.15rem; max-width: 46ch; }
+  .service__arrow {
+    width: 1.4rem; height: 1.4rem;
+    color: var(--ink-faint);
+    transition: transform var(--dur) var(--ease-out-quart), color var(--dur-fast) ease;
+  }
+  .service:hover .service__arrow { transform: translateX(4px); color: var(--brand-orange); }
+
+  @media (min-width: 62rem) {
+    .services__grid { grid-template-columns: 0.85fr 1.15fr; gap: var(--space-3xl); }
+    .services__aside { position: sticky; top: 6rem; }
+  }
+</style>

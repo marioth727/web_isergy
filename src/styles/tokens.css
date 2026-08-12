@@ -1,0 +1,87 @@
+/* ============================================================
+   Isergy — Design Tokens
+   Paleta de marca en OKLCH (naranja solar + verdes + pizarra),
+   neutros tintados hacia el naranja para cohesión.
+   ============================================================ */
+
+:root {
+  /* --- Marca --- */
+  --brand-orange: oklch(0.72 0.163 58);        /* #F39200 sol / CTA */
+  --brand-orange-strong: oklch(0.65 0.17 52);  /* hover / activo */
+  --brand-orange-soft: oklch(0.9 0.07 65);     /* tintes suaves */
+  --brand-orange-wash: oklch(0.965 0.03 70);   /* fondos muy suaves */
+
+  --brand-lime: oklch(0.79 0.16 130);          /* #8CC63F hoja clara */
+  --brand-forest: oklch(0.55 0.11 142);        /* #4C7C3A hoja oscura */
+  --brand-forest-deep: oklch(0.42 0.085 145);  /* verde profundo texto/acento */
+  --brand-forest-wash: oklch(0.955 0.03 140);  /* fondo verde muy suave */
+
+  /* --- Neutros (tintados cálidos hacia el naranja) --- */
+  --ink: oklch(0.28 0.02 250);                 /* texto principal (pizarra) */
+  --ink-soft: oklch(0.44 0.018 250);           /* texto secundario */
+  --ink-faint: oklch(0.6 0.014 250);           /* texto terciario / captions */
+
+  --paper: oklch(0.985 0.008 80);              /* fondo crema cálido */
+  --surface: oklch(1 0 0);                     /* tarjetas / superficies */
+  --surface-warm: oklch(0.975 0.012 75);       /* superficie cálida alt. */
+  --line: oklch(0.9 0.01 80);                  /* bordes sutiles */
+  --line-strong: oklch(0.83 0.012 75);
+
+  /* Superficie oscura para secciones de contraste (footer / CTA) */
+  --ink-surface: oklch(0.3 0.028 250);
+  --ink-surface-deep: oklch(0.24 0.03 252);
+
+  /* --- Tipografía --- */
+  --font-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk Variable', 'Hanken Grotesk', system-ui, sans-serif;
+
+  /* Escala fluida (clamp) — ratio ~1.25, contenido de marketing */
+  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.12rem + 0.4vw, 1.4rem);
+  --step-2: clamp(1.44rem, 1.3rem + 0.7vw, 1.75rem);
+  --step-3: clamp(1.73rem, 1.5rem + 1.15vw, 2.2rem);
+  --step-4: clamp(2.07rem, 1.7rem + 1.85vw, 2.75rem);
+  --step-5: clamp(2.49rem, 1.95rem + 2.7vw, 3.5rem);
+  --step-6: clamp(2.99rem, 2.2rem + 3.95vw, 4.5rem);
+
+  /* --- Espaciado (4pt, semántico) --- */
+  --space-3xs: 0.25rem;  /* 4  */
+  --space-2xs: 0.5rem;   /* 8  */
+  --space-xs: 0.75rem;   /* 12 */
+  --space-sm: 1rem;      /* 16 */
+  --space-md: 1.5rem;    /* 24 */
+  --space-lg: 2rem;      /* 32 */
+  --space-xl: 3rem;      /* 48 */
+  --space-2xl: 4rem;     /* 64 */
+  --space-3xl: 6rem;     /* 96 */
+  --space-4xl: clamp(4rem, 2rem + 9vw, 8rem);
+
+  /* --- Radios --- */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+  --radius-pill: 999px;
+
+  /* --- Sombras (cálidas, tintadas) --- */
+  --shadow-sm: 0 1px 2px oklch(0.4 0.03 60 / 0.06),
+               0 2px 6px oklch(0.4 0.03 60 / 0.05);
+  --shadow-md: 0 4px 12px oklch(0.4 0.03 60 / 0.08),
+               0 10px 30px oklch(0.4 0.03 60 / 0.07);
+  --shadow-lg: 0 8px 24px oklch(0.4 0.03 60 / 0.1),
+               0 24px 60px oklch(0.4 0.03 60 / 0.1);
+  --shadow-orange: 0 6px 20px oklch(0.72 0.163 58 / 0.35);
+
+  /* --- Layout --- */
+  --container: 76rem;
+  --container-narrow: 54rem;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+
+  /* --- Motion --- */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 160ms;
+  --dur: 280ms;
+  --dur-slow: 520ms;
+}

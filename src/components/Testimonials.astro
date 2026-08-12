@@ -1,0 +1,102 @@
+---
+// TODO: reemplazar por testimonios reales de clientes.
+const testimonials = [
+  {
+    quote: 'La factura pasó de $650.000 a menos de $80.000. La instalación fue rápida y muy profesional.',
+    name: 'Carolina M.',
+    role: 'Hogar · Barranquilla',
+    featured: true,
+  },
+  {
+    quote: 'Nos asesoraron sin presionar y el sistema funciona perfecto. Recomendados.',
+    name: 'Jorge P.',
+    role: 'Negocio · Soledad',
+  },
+  {
+    quote: 'Por fin sin sustos con los cortes de luz. El respaldo con baterías vale cada peso.',
+    name: 'Familia Rodríguez',
+    role: 'Finca · Atlántico',
+  },
+];
+---
+<section class="section testimonials">
+  <div class="container">
+    <header class="testi__head">
+      <p class="eyebrow">Lo que dicen</p>
+      <h2 class="testi__title">Clientes que ya no le temen a la factura</h2>
+    </header>
+
+    <div class="testi__grid">
+      {testimonials.map((t) => (
+        <figure class={`testi ${t.featured ? 'testi--featured' : ''}`}>
+          <div class="testi__stars" aria-label="5 de 5 estrellas">
+            {Array.from({ length: 5 }).map(() => (
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            ))}
+          </div>
+          <blockquote>{t.quote}</blockquote>
+          <figcaption>
+            <span class="testi__avatar" aria-hidden="true">{t.name.charAt(0)}</span>
+            <span>
+              <strong>{t.name}</strong>
+              <small>{t.role}</small>
+            </span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials { background: var(--ink-surface); color: oklch(0.94 0.01 80); }
+  .testi__head { max-width: 42rem; margin-bottom: var(--space-2xl); }
+  .testi__title { font-size: var(--step-4); color: #fff; margin-top: var(--space-sm); }
+  .testimonials .eyebrow { color: var(--brand-lime); }
+  .testimonials .eyebrow::before { background: var(--brand-orange); }
+
+  .testi__grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  }
+  .testi {
+    background: oklch(1 0 0 / 0.06);
+    border: 1px solid oklch(1 0 0 / 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: grid;
+    gap: var(--space-md);
+    align-content: start;
+  }
+  .testi--featured {
+    background: var(--brand-orange);
+    border-color: transparent;
+    color: oklch(0.22 0.03 60);
+  }
+
+  .testi__stars { display: flex; gap: 0.15rem; }
+  .testi__stars svg { width: 1.1rem; height: 1.1rem; fill: var(--brand-orange); }
+  .testi--featured .testi__stars svg { fill: oklch(0.25 0.03 60); }
+
+  .testi blockquote {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: 1.35;
+    font-weight: 500;
+  }
+  .testi figcaption { display: flex; align-items: center; gap: var(--space-sm); }
+  .testi__avatar {
+    display: grid; place-items: center;
+    width: 2.6rem; height: 2.6rem;
+    border-radius: 50%;
+    background: var(--brand-forest);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    flex: none;
+  }
+  .testi--featured .testi__avatar { background: oklch(0.25 0.03 60); }
+  .testi figcaption strong { display: block; font-size: var(--step-0); }
+  .testi figcaption small { color: currentColor; opacity: 0.7; font-size: var(--step--1); }
+</style>

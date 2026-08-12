@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-isergy.png';
+
+interface Props {
+  class?: string;
+  /** 'footer' aplica versión blanca para fondos oscuros */
+  variant?: 'default' | 'footer';
+}
+const { class: className = '', variant = 'default' } = Astro.props;
+const variantClass = variant === 'footer' ? 'site-logo--footer' : '';
+---
+<Image
+  src={logo}
+  alt="Isergy"
+  class={`site-logo ${variantClass} ${className}`}
+  widths={[160, 240, 320]}
+  sizes="150px"
+  loading="eager"
+/>

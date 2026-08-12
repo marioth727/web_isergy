@@ -1,0 +1,298 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../config/site';
+
+const title = `Política de Privacidad — ${site.name}`;
+const description = 'Política de privacidad de Isergy. Cómo protegemos tus datos personales en Colombia.';
+const path = '/politica-privacidad/';
+---
+
+<BaseLayout title={title} description={description} path={path}>
+  <Header slot="header" />
+
+  <article class="legal">
+    <section class="legal__hero">
+      <div class="container-narrow">
+        <h1>Política de Privacidad</h1>
+        <p class="legal__meta">Última actualización: {new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+      </div>
+    </section>
+
+    <section class="section legal__body">
+      <div class="container-narrow prose">
+        <h2>1. Introducción</h2>
+        <p>
+          En <strong>{site.legalName}</strong> ("nosotros", "nuestro", "Isergy"), valoramos tu privacidad y nos
+          comprometemos a proteger tus datos personales de conformidad con la Ley 1581 de 2012 (Habeas Data) y sus
+          decretos reglamentarios en Colombia, así como con regulaciones internacionales aplicables.
+        </p>
+        <p>
+          Esta Política de Privacidad explica cómo recopilamos, usamos, compartimos y protegemos tu información cuando
+          utilizas nuestro sitio web, nos contactas a través de WhatsApp, solicitas una cotización, o interactúas con
+          nosotros de cualquier forma.
+        </p>
+
+        <h2>2. Información que Recopilamos</h2>
+
+        <h3>2.1 Información que nos proporcionas directamente</h3>
+        <ul>
+          <li><strong>Contacto:</strong> Nombre, número de teléfono, correo electrónico, ciudad/municipio.</li>
+          <li>
+            <strong>Consultas y cotizaciones:</strong> Factura de luz actual, consumo aproximado, tipo de propiedad
+            (residencial/comercial), descripción de tu necesidad.
+          </li>
+          <li><strong>Comunicaciones:</strong> Mensajes que envíes a través de WhatsApp, formularios del sitio.</li>
+        </ul>
+
+        <h3>2.2 Información recopilada automáticamente</h3>
+        <ul>
+          <li>
+            <strong>Datos de navegación:</strong> Dirección IP, tipo de navegador, páginas visitadas, tiempo de visita,
+            referencias (cookies y almacenamiento local).
+          </li>
+          <li>
+            <strong>Datos de WhatsApp:</strong> Cuando utilizas WhatsApp Business para contactarnos, Meta/WhatsApp
+            recopila metadatos (fecha, hora, identificación de cuenta). Consulta la{' '}
+            <a href="https://www.whatsapp.com/legal/updates/privacy-policy" target="_blank" rel="noopener"
+              >Política de WhatsApp</a
+            >.
+          </li>
+        </ul>
+
+        <h2>3. Uso de tu Información</h2>
+        <p>Utilizamos tus datos personales para:</p>
+        <ul>
+          <li>Procesar y responder tu cotización o consulta de energía solar.</li>
+          <li>Comunicarnos contigo sobre servicios, actualizaciones y promociones (con tu consentimiento).</li>
+          <li>Mejorar nuestro sitio web, servicios y experiencia del usuario.</li>
+          <li>Cumplir obligaciones legales y regulatorias en Colombia.</li>
+          <li>Prevenir fraude y proteger la seguridad de nuestros sistemas.</li>
+        </ul>
+
+        <h2>4. Base Legal del Procesamiento</h2>
+        <p>Procesamos tus datos bajo las siguientes bases legales (Ley 1581/2012):</p>
+        <ul>
+          <li>
+            <strong>Consentimiento:</strong> Aceptas esta política al usar nuestro sitio o solicitar información.
+          </li>
+          <li>
+            <strong>Contrato:</strong> Procesamiento necesario para ejecutar tu solicitud de cotización o servicio.
+          </li>
+          <li>
+            <strong>Obligación legal:</strong> Cumplimiento de normativas tributarias y regulatorias en Colombia.
+          </li>
+        </ul>
+
+        <h2>5. Compartición de Datos</h2>
+        <p>No vendemos ni compartimos tu información personal con terceros, excepto:</p>
+        <ul>
+          <li>
+            <strong>Meta/WhatsApp:</strong> Cuando te contactas por WhatsApp, aceptas que Meta procese tus datos
+            conforme a su política (independiente de la nuestra).
+          </li>
+          <li>
+            <strong>Proveedores de servicios:</strong> Empresas que nos ayudan con hosting, correo, análisis (bajo
+            contratos de confidencialidad).
+          </li>
+          <li>
+            <strong>Autoridades legales:</strong> Si la ley lo requiere, en respuesta a órdenes judiciales legales.
+          </li>
+        </ul>
+
+        <h2>6. Retención de Datos</h2>
+        <p>
+          Conservamos tu información personal durante el tiempo necesario para cumplir los fines descritos, salvo que
+          la ley exija un plazo mayor. Por defecto:
+        </p>
+        <ul>
+          <li>
+            <strong>Cotizaciones y consultas:</strong> Hasta 2 años (para seguimiento y reportes comerciales).
+          </li>
+          <li><strong>Historiales de cliente:</strong> Durante toda la relación comercial + 5 años (requisito fiscal).</li>
+          <li>
+            <strong>Datos de navegación (cookies):</strong> Hasta 12 meses, o según configuración de tu navegador.
+          </li>
+        </ul>
+
+        <h2>7. Tus Derechos (ARCO)</h2>
+        <p>
+          Conforme a la Ley 1581/2012, tienes derecho a:
+        </p>
+        <ul>
+          <li>
+            <strong>Acceso (A):</strong> Solicitar una copia de tus datos y cómo los procesamos.
+          </li>
+          <li>
+            <strong>Rectificación (R):</strong> Corregir información inexacta o incompleta.
+          </li>
+          <li>
+            <strong>Cancelación (C):</strong> Solicitar la eliminación de tus datos (excepto cuando la ley lo prohíba).
+          </li>
+          <li>
+            <strong>Oposición (O):</strong> Rechazar ciertos usos (ej: marketing), salvo obligaciones legales.
+          </li>
+        </ul>
+        <p>
+          Para ejercer estos derechos, contáctanos en{' '}
+          <a href={`mailto:${site.email}`}>{site.email}</a> o por WhatsApp{' '}
+          <a href={`https://wa.me/${site.whatsapp}`}>{site.whatsappDisplay}</a>.
+        </p>
+
+        <h2>8. Seguridad</h2>
+        <p>
+          Implementamos medidas técnicas y organizacionales para proteger tu información contra acceso no autorizado,
+          alteración, divulgación o destrucción:
+        </p>
+        <ul>
+          <li>Cifrado de datos en tránsito (HTTPS).</li>
+          <li>Acceso restringido solo a empleados autorizados.</li>
+          <li>Almacenamiento seguro de servidores profesionales.</li>
+        </ul>
+        <p>
+          Sin embargo, ningún método de transmisión en internet es 100% seguro. Si sospechas una violación de datos,
+          notifícanos de inmediato.
+        </p>
+
+        <h2>9. Cookies y Tecnologías Similares</h2>
+        <p>
+          Nuestro sitio usa cookies para mejorar la experiencia:
+        </p>
+        <ul>
+          <li><strong>Cookies esenciales:</strong> Necesarias para el funcionamiento del sitio.</li>
+          <li><strong>Cookies analíticas:</strong> Para entender cómo usas nuestro sitio (Google Analytics).</li>
+          <li><strong>Cookies de marketing:</strong> Para mostrar contenido relevante (si das consentimiento).</li>
+        </ul>
+        <p>
+          Puedes rechazar o limpiar cookies desde tu navegador. Ten en cuenta que deshabilitarlas puede afectar la
+          funcionalidad del sitio.
+        </p>
+
+        <h2>10. Menores de Edad</h2>
+        <p>
+          Nuestro sitio no está dirigido a menores de 18 años. No recopilamos información de menores
+          deliberadamente. Si descubrimos que hemos recopilado datos de un menor sin consentimiento de un tutor legal,
+          los eliminaremos inmediatamente.
+        </p>
+
+        <h2>11. Enlaces a Terceros</h2>
+        <p>
+          Nuestro sitio puede contener enlaces a sitios de terceros (Meta/WhatsApp, redes sociales, etc.). No
+          somos responsables de sus políticas de privacidad. Te animamos a revisar sus políticas antes de compartir
+          información.
+        </p>
+
+        <h2>12. Cumplimiento Legal</h2>
+        <p>
+          Isergy cumple con:
+        </p>
+        <ul>
+          <li><strong>Ley 1581 de 2012 (Habeas Data Colombia)</strong> — Decreto 1377/2013.</li>
+          <li>
+            <strong>GDPR (si aplica):</strong> Si eres residente de la UE, tus derechos bajo GDPR también se aplican.
+          </li>
+          <li><strong>Meta's Platform Policies</strong> — Para datos compartidos vía WhatsApp Business API.</li>
+        </ul>
+
+        <h2>13. Cambios a Esta Política</h2>
+        <p>
+          Podemos actualizar esta Política de Privacidad en cualquier momento. Los cambios serán efectivos cuando los
+          publiquemos en esta página. Te recomendamos revisar esta política periódicamente. Tu uso continuado del sitio
+          después de cambios significa que aceptas la versión actualizada.
+        </p>
+
+        <h2>14. Contacto y Reclamos</h2>
+        <p>
+          Para preguntas sobre esta política, ejercer tus derechos ARCO, o reportar un incidente de privacidad:
+        </p>
+        <ul>
+          <li>
+            <strong>Correo:</strong> <a href={`mailto:${site.email}`}>{site.email}</a>
+          </li>
+          <li>
+            <strong>WhatsApp:</strong> <a href={`https://wa.me/${site.whatsapp}`}>{site.whatsappDisplay}</a>
+          </li>
+          <li>
+            <strong>Dirección:</strong> {site.address}
+          </li>
+        </ul>
+
+        <p>
+          <strong>Plazos de respuesta:</strong> Responderemos solicitudes ARCO dentro de 10 días hábiles conforme a la
+          ley colombiana.
+        </p>
+
+        <p>
+          Si no estás satisfecho con nuestra respuesta, puedes presentar un reclamo ante la <strong
+            >Superintendencia de Industria y Comercio (SIC)</strong
+          > de Colombia en <a href="https://www.sic.gov.co" target="_blank" rel="noopener">www.sic.gov.co</a>.
+        </p>
+
+        <h2>15. Autoridad Supervisora</h2>
+        <p>
+          En Colombia, la autoridad competente es la <strong>Superintendencia de Industria y Comercio (SIC)</strong>,
+          responsable de hacer cumplir la Ley 1581/2012.
+        </p>
+
+        <hr />
+
+        <p style="text-align: center; margin-top: 3rem; color: var(--ink-faint);">
+          © {new Date().getFullYear()} {site.legalName}. Todos los derechos reservados.
+        </p>
+      </div>
+    </section>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .legal__hero {
+    padding-block: var(--space-3xl) var(--space-2xl);
+    background: var(--surface-warm);
+    border-bottom: 1px solid var(--line);
+  }
+  .legal__hero h1 {
+    font-size: var(--step-4);
+    margin-bottom: var(--space-md);
+  }
+  .legal__meta {
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+  }
+
+  .legal__body {
+    background: var(--paper);
+  }
+  .legal__body h2 {
+    margin-top: var(--space-2xl);
+    font-size: var(--step-2);
+    margin-bottom: var(--space-md);
+  }
+  .legal__body h3 {
+    margin-top: var(--space-lg);
+    font-size: var(--step-1);
+    margin-bottom: var(--space-sm);
+    color: var(--brand-forest);
+  }
+  .legal__body ul {
+    margin-left: 1.5rem;
+    margin-bottom: var(--space-md);
+  }
+  .legal__body li {
+    margin-bottom: 0.5rem;
+  }
+  .legal__body a {
+    color: var(--brand-orange);
+    font-weight: 600;
+  }
+  .legal__body a:hover {
+    text-decoration: underline;
+  }
+  .legal__body hr {
+    margin: var(--space-2xl) 0;
+    border: none;
+    border-top: 1px solid var(--line);
+  }
+</style>
